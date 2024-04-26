@@ -116,6 +116,7 @@ virtual const char * AddCtor{id}(){{
                 and self.could_user_class_export(base_cursor.type)):
             t_param_list.append(common.safe_type_reference(base_cursor.type))
             self._dependency.add(common.safe_type_reference(base_cursor.type))
+        t_param_list.append(f"std::shared_ptr<{self.reference_name()}>")
         return f"pybind11::class_<{','.join(t_param_list)}>"
 
     def extra_code(self) -> str:
